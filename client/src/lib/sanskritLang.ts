@@ -1,3 +1,6 @@
+import { Parser } from "./parser";
+import { CodeGenerator } from "./codegen";
+
 interface OutputLine {
   type: "output" | "error" | "success";
   message: string;
@@ -5,27 +8,17 @@ interface OutputLine {
 
 export class SanskritLangInterpreter {
   private output: OutputLine[] = [];
+  private parser: Parser | null = null;
+  private codegen: CodeGenerator = new CodeGenerator();
 
   transpile(code: string): string {
-    let jsCode = code;
-
-    jsCode = jsCode.replace(/likh\s+"([^"]*)"/g, 'console.log("$1")');
-    jsCode = jsCode.replace(/likh\s+'([^']*)'/g, "console.log('$1')");
-    jsCode = jsCode.replace(/likh\s+([^\s;]+)/g, "console.log($1)");
-
-    jsCode = jsCode.replace(/sthapan\s+(\w+)\s*=\s*(.+)/g, "let $1 = $2");
-
-    jsCode = jsCode.replace(/yadi\s*\(([^)]+)\)/g, "if ($1)");
-    jsCode = jsCode.replace(/anyatha/g, "else");
-
-    jsCode = jsCode.replace(/yavat\s*\(([^)]+)\)/g, "while ($1)");
-
-    jsCode = jsCode.replace(
-      /karya\s+(\w+)\s*\(([^)]*)\)/g,
-      "function $1($2)"
-    );
-
-    return jsCode;
+    try {
+      this.parser = new Parser(code);
+      const ast = this.parser.parse();
+      return this.codegen.generate(ast);
+    } catch (error: any) {
+      throw new Error(this.formatError(error.message));
+    }
   }
 
   execute(code: string): OutputLine[] {
@@ -37,7 +30,7 @@ export class SanskritLangInterpreter {
       const capturedLogs: string[] = [];
       const originalLog = console.log;
       console.log = (...args: any[]) => {
-        capturedLogs.push(args.join(" "));
+        capturedLogs.push(args.map(arg => String(arg)).join(" "));
       };
 
       try {
@@ -50,12 +43,12 @@ export class SanskritLangInterpreter {
 
         this.output.push({
           type: "success",
-          message: "Code executed successfully",
+          message: "कोड सफलतापूर्वक निष्पादित (Code executed successfully)",
         });
       } catch (execError: any) {
         this.output.push({
           type: "error",
-          message: `Runtime Error: ${execError.message}`,
+          message: `त्रुटि (Runtime Error): ${execError.message}`,
         });
       } finally {
         console.log = originalLog;
@@ -63,10 +56,21 @@ export class SanskritLangInterpreter {
     } catch (error: any) {
       this.output.push({
         type: "error",
-        message: `Transpilation Error: ${error.message}`,
+        message: error.message,
       });
     }
 
     return this.output;
+  }
+
+  private formatError(message: string): string {
+    // Add Sanskrit-themed error messages
+    if (message.includes("Expected")) {
+      return `वाक्यविन्यास त्रुटि (Syntax Error): ${message}`;
+    }
+    if (message.includes("Unexpected")) {
+      return `अप्रत्याशित चिह्न (Unexpected Token): ${message}`;
+    }
+    return `त्रुटि (Error): ${message}`;
   }
 }

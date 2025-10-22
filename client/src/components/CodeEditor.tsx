@@ -1,17 +1,25 @@
-import { useState } from "react";
-import { Textarea } from "@/components/ui/textarea";
+import { useState, useRef, useEffect } from "react";
 import { Play, Copy, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
+import { highlightSanskritCode } from "@/lib/syntaxHighlight";
 
 interface CodeEditorProps {
+  code: string;
+  onCodeChange: (code: string) => void;
   onRun: (code: string) => void;
-  defaultCode?: string;
 }
 
-export function CodeEditor({ onRun, defaultCode = "" }: CodeEditorProps) {
-  const [code, setCode] = useState(defaultCode);
+export function CodeEditor({ code, onCodeChange, onRun }: CodeEditorProps) {
   const { toast } = useToast();
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const highlightRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (highlightRef.current) {
+      highlightRef.current.innerHTML = highlightSanskritCode(code || " ");
+    }
+  }, [code]);
 
   const handleRun = () => {
     onRun(code);
@@ -26,7 +34,32 @@ export function CodeEditor({ onRun, defaultCode = "" }: CodeEditorProps) {
   };
 
   const handleClear = () => {
-    setCode("");
+    onCodeChange("");
+  };
+
+  const handleScroll = (e: React.UIEvent<HTMLTextAreaElement>) => {
+    if (highlightRef.current) {
+      highlightRef.current.scrollTop = e.currentTarget.scrollTop;
+      highlightRef.current.scrollLeft = e.currentTarget.scrollLeft;
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === "Tab") {
+      e.preventDefault();
+      const target = e.currentTarget;
+      const start = target.selectionStart;
+      const end = target.selectionEnd;
+      const newCode = code.substring(0, start) + "  " + code.substring(end);
+      onCodeChange(newCode);
+      setTimeout(() => {
+        target.selectionStart = target.selectionEnd = start + 2;
+      }, 0);
+    }
+    if (e.ctrlKey && e.key === "Enter") {
+      e.preventDefault();
+      handleRun();
+    }
   };
 
   return (
@@ -62,14 +95,26 @@ export function CodeEditor({ onRun, defaultCode = "" }: CodeEditorProps) {
           </Button>
         </div>
       </div>
-      <div className="flex-1 p-4 overflow-auto">
-        <Textarea
-          value={code}
-          onChange={(e) => setCode(e.target.value)}
-          placeholder='likh "Namaste Jagat"'
-          className="min-h-full font-mono text-sm resize-none border-0 focus-visible:ring-0 p-0"
-          data-testid="textarea-code"
-        />
+      <div className="flex-1 p-4 overflow-auto relative">
+        <div className="relative font-mono text-sm">
+          <div
+            ref={highlightRef}
+            className="absolute inset-0 pointer-events-none whitespace-pre-wrap break-words overflow-hidden"
+            aria-hidden="true"
+          />
+          <textarea
+            ref={textareaRef}
+            value={code}
+            onChange={(e) => onCodeChange(e.target.value)}
+            onScroll={handleScroll}
+            onKeyDown={handleKeyDown}
+            placeholder='likh "Namaste Jagat"'
+            className="relative w-full h-full bg-transparent resize-none border-0 outline-none text-transparent caret-foreground"
+            style={{ caretColor: "hsl(var(--foreground))" }}
+            data-testid="textarea-code"
+            spellCheck={false}
+          />
+        </div>
       </div>
     </div>
   );
