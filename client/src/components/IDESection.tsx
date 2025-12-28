@@ -16,7 +16,7 @@ interface OutputLine {
   message: string;
 }
 
-const defaultCode = `// Welcome to SanskritLang!
+const defaultCode = `// स्वागतम् SanskritLang में!
 likh "Namaste Jagat"
 
 sthapan x = 10
