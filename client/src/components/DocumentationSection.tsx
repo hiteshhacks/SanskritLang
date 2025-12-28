@@ -45,7 +45,7 @@ export function DocumentationSection() {
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold font-serif mb-2">
-            Language Reference / भाषा संदर्भ
+            Language Reference / भाषा प्रकाशकम्
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Learn the Sanskrit-inspired keywords and their usage in SanskritLang

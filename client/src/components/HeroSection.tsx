@@ -25,7 +25,7 @@ export function HeroSection() {
             Code in the Language of the Ancients
           </h1>
           <p className="text-xl md:text-2xl text-white/90 font-serif">
-            प्राचीन भाषा में कोड करें
+            प्राचीने भाषायां कोडं लिखन्तु
           </p>
           <p className="text-lg text-white/80 max-w-2xl mx-auto">
             Blend the elegance of Sanskrit with modern programming. Write code

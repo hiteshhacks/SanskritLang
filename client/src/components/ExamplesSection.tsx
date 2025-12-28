@@ -46,7 +46,7 @@ export function ExamplesSection() {
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold font-serif mb-2">
-            Code Examples / उदाहरण
+            Code Examples / कोडोदाहरणानि
           </h2>
           <p className="text-muted-foreground">
             Explore sample programs to get started with SanskritLang

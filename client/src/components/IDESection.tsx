@@ -56,16 +56,16 @@ export function IDESection() {
       <div className="container mx-auto max-w-7xl">
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold font-serif mb-2">
-            Try the IDE / संपादक
+            Try the IDE / संपादन
           </h2>
           <p className="text-muted-foreground mb-4">
             Write and execute SanskritLang code in your browser
           </p>
           <div className="flex items-center justify-center gap-2">
-            <span className="text-sm text-muted-foreground">Load Example:</span>
+            <span className="text-sm text-muted-foreground">उदाहरणं आनयन्तु:</span>
             <Select onValueChange={loadExample}>
               <SelectTrigger className="w-64" data-testid="select-example">
-                <SelectValue placeholder="Choose an example..." />
+                <SelectValue placeholder="उदाहरणं वरयन्तु..." />
               </SelectTrigger>
               <SelectContent>
                 {examplePrograms.map((example) => (

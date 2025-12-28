@@ -66,7 +66,7 @@ export function CodeEditor({ code, onCodeChange, onRun }: CodeEditorProps) {
     <div className="flex flex-col h-full">
       <div className="flex items-center justify-between p-4 border-b gap-2">
         <h2 className="text-sm font-semibold text-muted-foreground">
-          Code Editor / संपादक
+          Code Editor / संपादन
         </h2>
         <div className="flex items-center gap-2">
           <Button
@@ -91,7 +91,7 @@ export function CodeEditor({ code, onCodeChange, onRun }: CodeEditorProps) {
             data-testid="button-run"
           >
             <Play className="h-4 w-4" />
-            चलाओ Run
+            चलय
           </Button>
         </div>
       </div>
@@ -108,7 +108,7 @@ export function CodeEditor({ code, onCodeChange, onRun }: CodeEditorProps) {
             onChange={(e) => onCodeChange(e.target.value)}
             onScroll={handleScroll}
             onKeyDown={handleKeyDown}
-            placeholder='likh "Namaste Jagat"'
+            placeholder='लिख "नमस्ते जगत्"'
             className="relative w-full h-full bg-transparent resize-none border-0 outline-none text-transparent caret-foreground"
             style={{ caretColor: "hsl(var(--foreground))" }}
             data-testid="textarea-code"
