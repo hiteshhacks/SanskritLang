@@ -95,26 +95,18 @@ export function CodeEditor({ code, onCodeChange, onRun }: CodeEditorProps) {
           </Button>
         </div>
       </div>
-      <div className="flex-1 p-4 overflow-auto relative">
-        <div className="relative font-mono text-sm">
-          <div
-            ref={highlightRef}
-            className="absolute inset-0 pointer-events-none whitespace-pre-wrap break-words overflow-hidden"
-            aria-hidden="true"
-          />
-          <textarea
-            ref={textareaRef}
-            value={code}
-            onChange={(e) => onCodeChange(e.target.value)}
-            onScroll={handleScroll}
-            onKeyDown={handleKeyDown}
-            placeholder='लिख "नमस्ते जगत्"'
-            className="relative w-full h-full bg-transparent resize-none border-0 outline-none text-transparent caret-foreground"
-            style={{ caretColor: "hsl(var(--foreground))" }}
-            data-testid="textarea-code"
-            spellCheck={false}
-          />
-        </div>
+      <div className="flex-1 overflow-hidden">
+        <textarea
+          ref={textareaRef}
+          value={code}
+          onChange={(e) => onCodeChange(e.target.value)}
+          onScroll={handleScroll}
+          onKeyDown={handleKeyDown}
+          placeholder='लिख "नमस्ते जगत्"'
+          className="w-full h-full p-4 font-mono text-sm resize-none border-0 outline-none bg-background text-foreground focus-visible:ring-0"
+          data-testid="textarea-code"
+          spellCheck={false}
+        />
       </div>
     </div>
   );
