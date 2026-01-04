@@ -5,25 +5,25 @@ import { useToast } from "@/hooks/use-toast";
 
 const examples = [
   {
-    title: "Hello World",
+    title: "नमस्कार विश्व",
     description: "Your first SanskritLang program",
     code: 'likh "Namaste Jagat"',
     output: "Namaste Jagat",
   },
   {
-    title: "Variables & Math",
+    title: "चर एवं गणित",
     description: "Declare variables and perform calculations",
     code: 'sthapan x = 10\nsthapan y = 20\nlikh "Sum:"\nlikh x + y',
     output: "Sum:\n30",
   },
   {
-    title: "Conditional Logic",
+    title: "सशर्त तर्कः",
     description: "Use if-else statements",
     code: 'sthapan age = 25\nyadi (age >= 18) {\n  likh "Adult"\n}\nanyatha {\n  likh "Minor"\n}',
     output: "Adult",
   },
   {
-    title: "Loops",
+    title: "पाशः",
     description: "Iterate with while loops",
     code: "sthapan i = 1\nyavat (i <= 3) {\n  likh i\n  i = i + 1\n}",
     output: "1\n2\n3",

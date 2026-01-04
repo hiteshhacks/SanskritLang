@@ -17,7 +17,7 @@ export function OutputConsole({ output }: OutputConsoleProps) {
       <div className="flex items-center gap-2 p-4 border-b">
         <Terminal className="h-4 w-4 text-muted-foreground" />
         <h2 className="text-sm font-semibold text-muted-foreground">
-          Output / निर्गमन
+          Output / उत्पादनम्
         </h2>
       </div>
       <ScrollArea className="flex-1 p-4">

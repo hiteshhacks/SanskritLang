@@ -1,4 +1,6 @@
-import heroImage from "@assets/generated_images/Sanskrit_manuscripts_morphing_into_code_2e7d95ae.png";
+// import heroImage from "@assets/generated_images/iPhone.jpg";
+import heroVideo from "@assets/generated_images/hero.mp4";
+
 import { Button } from "@/components/ui/button";
 import { Code2, BookOpen } from "lucide-react";
 
@@ -13,12 +15,26 @@ export function HeroSection() {
 
   return (
     <div className="relative h-[60vh] overflow-hidden w-full">
-      <div
+      <div className="absolute inset-0 overflow-hidden">
+  <video
+    autoPlay
+    loop
+    muted
+    playsInline
+    className="absolute inset-0 w-full h-full object-cover"
+  >
+    <source src={heroVideo} type="video/mp4" />
+  </video>
+
+  <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-background" />
+</div>
+
+      {/* <div
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: `url(${heroImage})` }}
       >
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-background" />
-      </div>
+      </div> */}
       <div className="relative h-full flex items-center justify-center text-center px-4 w-full">
         <div className="max-w-4xl space-y-6">
           <h1 className="text-4xl md:text-6xl font-bold text-white font-serif">

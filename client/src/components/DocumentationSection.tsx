@@ -2,37 +2,37 @@ import { DocumentationCard } from "./DocumentationCard";
 
 const keywords = [
   {
-    sanskritKeyword: "likh",
+    sanskritKeyword: "लिख्",
     englishTranslation: "Print / Output",
     description: "Outputs text or values to the console",
     example: 'likh "Namaste Jagat"',
   },
   {
-    sanskritKeyword: "sthapan",
+    sanskritKeyword: "स्थापनम्",
     englishTranslation: "Variable Declaration",
     description: "Declares a variable and assigns a value",
     example: "sthapan x = 10",
   },
   {
-    sanskritKeyword: "yadi",
+    sanskritKeyword: "यदि",
     englishTranslation: "If Condition",
     description: "Executes code block if condition is true",
     example: "yadi (x > 5) { likh x }",
   },
   {
-    sanskritKeyword: "anyatha",
+    sanskritKeyword: "अन्यथा",
     englishTranslation: "Else",
     description: "Executes when if condition is false",
     example: "anyatha { likh 0 }",
   },
   {
-    sanskritKeyword: "yavat",
+    sanskritKeyword: "यवत",
     englishTranslation: "While Loop",
     description: "Repeats code block while condition is true",
     example: "yavat (x < 10) { likh x }",
   },
   {
-    sanskritKeyword: "karya",
+    sanskritKeyword: "कार्यम्",
     englishTranslation: "Function",
     description: "Defines a reusable function",
     example: "karya namaste() { likh 'Hello' }",
